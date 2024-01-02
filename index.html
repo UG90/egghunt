@@ -1,0 +1,65 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Easter Egg Hunt</title>
+  <style>
+    body {
+      background-image: url('egghunt.jpg'); /* Replace 'background-image.jpg' with your image file */
+      background-size: cover;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    button {
+      background-color: #ffcc99;
+      color: #4d2600;
+      padding: 15px 30px;
+      font-size: 18px;
+      margin: 10px;
+      border: 2px solid #ff9966;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s, transform 0.2s;
+      overflow: hidden;
+      position: relative;
+    }
+
+    button:hover {
+      background-color: #ff9966;
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #ff9966, #ffcc99);
+      opacity: 0.3;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+
+<button onclick="redirectToPage('unscramble.html')">Egg 1</button>
+<button onclick="redirectToPage('page2.html')">Egg 2</button>
+<button onclick="redirectToPage('page3.html')">Egg 3</button>
+<button onclick="redirectToPage('page4.html')">Egg 4</button>
+<button onclick="redirectToPage('page5.html')">Egg 5</button>
+
+<script>
+  function redirectToPage(page) {
+    window.location.href = page;
+  }
+</script>
+
+</body>
+</html>
