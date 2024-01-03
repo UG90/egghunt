@@ -3,57 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guess the YouTuber</title>
+    <title>Emoji Song Guessing Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Guess the YouTuber</h1>
-    <button onclick="playAudio()">Play Audio</button>
-    <button onclick="pauseAudio()">Pause Audio</button>
-    <button onclick="resumeAudio()">Resume Audio</button>
+    <h1>Emoji Song Guessing Game</h1>
+    <div id="game-container">
+        <p id="emoji-display"></p>
+        <input type="text" id="guess-input" placeholder="Your guess">
+        <button onclick="checkGuess()">Submit Guess</button>
+        <p id="result"></p>
+        <button onclick="playAgain()">Play Again</button>
+    </div>
 
     <script>
-        let audioElement = new Audio();
-        let currentLevel = 0;
-        let youtuberNames = ['pewdiepie', 'markiplier', 'jacksepticeye']; // Add more YouTuber names as needed
+        // Define an array with objects representing songs and their corresponding emojis
+        var songs = [
+            { name: "Shape of You", emoji: "🔵👤👫" },
+            { name: "Happy", emoji: "😊🎵" },
+            { name: "Bad Romance", emoji: "👎💑" },
+            { name: "Despacito", emoji: "🐢👟" }
+            // Add more songs and emojis as needed
+        ];
 
-        function playAudio() {
-            let targetYoutuber = youtuberNames[currentLevel];
-            let audioSource = `path_to_audio/${targetYoutuber}.mp3`; // Replace with the actual path to your audio files
+        var currentSongIndex;
+        var score = 0;
 
-            audioElement.src = audioSource;
-            audioElement.play();
-            console.log(`Audio of ${targetYoutuber} is playing...`);
+        function chooseSong() {
+            // Choose a random song from the array
+            currentSongIndex = Math.floor(Math.random() * songs.length);
+            return songs[currentSongIndex];
         }
 
-        function pauseAudio() {
-            audioElement.pause();
-            console.log('Audio paused.');
-        }
-
-        function resumeAudio() {
-            audioElement.play();
-            console.log('Audio resumed...');
+        function displayEmoji() {
+            var currentSong = chooseSong();
+            var emojiDisplay = document.getElementById("emoji-display");
+            emojiDisplay.textContent = "Guess the song: " + currentSong.emoji;
         }
 
         function checkGuess() {
-            let playerGuess = prompt('Guess the YouTuber:').toLowerCase();
-            let targetYoutuber = youtuberNames[currentLevel];
+            var userGuess = document.getElementById("guess-input").value.toLowerCase();
+            var resultDisplay = document.getElementById("result");
 
-            if (playerGuess === targetYoutuber) {
-                alert('Congratulations! You guessed it right.');
-                currentLevel++;
-
-                if (currentLevel < youtuberNames.length) {
-                    alert('Next Level!');
-                    playAudio();
-                } else {
-                    alert('You completed all levels!');
-                    pauseAudio();
-                }
+            // Check if the guess is correct
+            if (userGuess === songs[currentSongIndex].name.toLowerCase()) {
+                resultDisplay.textContent = "Correct! Well done.";
+                score++;
             } else {
-                alert(`Oops! You guessed ${playerGuess}. Try again!`);
+                resultDisplay.textContent = "Wrong! The correct answer is: " + songs[currentSongIndex].name;
             }
+
+            // Disable input and button after a guess
+            document.getElementById("guess-input").disabled = true;
+            document.querySelector("button").disabled = true;
         }
+
+        function playAgain() {
+            // Enable input and button for the next round
+            document.getElementById("guess-input").disabled = false;
+            document.querySelector("button").disabled = false;
+
+            // Clear result and input
+            document.getElementById("result").textContent = "";
+            document.getElementById("guess-input").value = "";
+
+            // Display the next emoji for the player to guess
+            displayEmoji();
+        }
+
+        // Initialize the game
+        displayEmoji();
     </script>
 </body>
 </html>
