@@ -19,33 +19,26 @@
         <input type="text" id="guess-input" placeholder="Your guess">
         <button onclick="checkGuess()">Submit Guess</button>
         <p id="result"></p>
-        <button onclick="playAgain()">Play Again</button>
+        <button onclick="nextRound()">Next Song</button>
     </div>
 
     <script>
         // Define an array with objects representing songs and their corresponding emojis
         var songs = [
-            { name: "bijli", emoji: "⚡" },
-            { name: "heeriye", emoji: "💎" },
-            { name: "gulabi sharara", emoji: "🩷 Sharara" },
-            { name: "udd jaa kaale kaava", emoji: "🕊️⚫🐦‍⬛" }
-            { name: "chal tere ishq mein", emoji: "🤌🫵💖" }
+            { name: "Bijli", emoji: "⚡" },
+            { name: "Heeriye", emoji: "💎" },
+            { name: "Gulabi Sharara", emoji: "🩷 Sharara" },
+            { name: "Udd Jaa Kaale Kaava", emoji: "🕊️⚫🐦‍⬛" },
+            { name: "Chal Tere Ishq Mein", emoji: "🤌🫵💖" },
             // Add more songs and emojis as needed
         ];
 
-        var currentSongIndex;
+        var currentSongIndex = 0;
         var score = 0;
 
-        function chooseSong() {
-            // Choose a random song from the array
-            currentSongIndex = Math.floor(Math.random() * songs.length);
-            return songs[currentSongIndex];
-        }
-
         function displayEmoji() {
-            var currentSong = chooseSong();
             var emojiDisplay = document.getElementById("emoji-display");
-            emojiDisplay.textContent = "Guess the song: " + currentSong.emoji;
+            emojiDisplay.textContent = "Guess the song: " + songs[currentSongIndex].emoji;
         }
 
         function checkGuess() {
@@ -57,7 +50,7 @@
                 resultDisplay.textContent = "Correct! Well done.";
                 score++;
             } else {
-                resultDisplay.textContent = "Wrong! The correct answer is: " + songs[currentSongIndex].name;
+                resultDisplay.textContent = "Incorrect. Keep trying!";
             }
 
             // Disable input and button after a guess
@@ -65,7 +58,7 @@
             document.querySelector("button").disabled = true;
         }
 
-        function playAgain() {
+        function nextRound() {
             // Enable input and button for the next round
             document.getElementById("guess-input").disabled = false;
             document.querySelector("button").disabled = false;
@@ -74,8 +67,18 @@
             document.getElementById("result").textContent = "";
             document.getElementById("guess-input").value = "";
 
-            // Display the next emoji for the player to guess
-            displayEmoji();
+            // Move to the next song
+            currentSongIndex++;
+
+            // Check if all songs have been guessed
+            if (currentSongIndex < songs.length) {
+                // Display the next emoji for the player to guess
+                displayEmoji();
+            } else {
+                // Display the final score when all songs have been guessed
+                alert("Game Over! Your final score is: " + score);
+                // Optionally, you can reset the game or take some other action here
+            }
         }
 
         // Initialize the game
