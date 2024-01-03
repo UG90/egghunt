@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the YouTuber</title>
+</head>
+<body>
+    <h1>Guess the YouTuber</h1>
+    <button onclick="playAudio()">Play Audio</button>
+    <button onclick="pauseAudio()">Pause Audio</button>
+    <button onclick="resumeAudio()">Resume Audio</button>
+
+    <script>
+        let audioElement = new Audio();
+        let currentLevel = 0;
+        let youtuberNames = ['pewdiepie', 'markiplier', 'jacksepticeye']; // Add more YouTuber names as needed
+
+        function playAudio() {
+            let targetYoutuber = youtuberNames[currentLevel];
+            let audioSource = `path_to_audio/${targetYoutuber}.mp3`; // Replace with the actual path to your audio files
+
+            audioElement.src = audioSource;
+            audioElement.play();
+            console.log(`Audio of ${targetYoutuber} is playing...`);
+        }
+
+        function pauseAudio() {
+            audioElement.pause();
+            console.log('Audio paused.');
+        }
+
+        function resumeAudio() {
+            audioElement.play();
+            console.log('Audio resumed...');
+        }
+
+        function checkGuess() {
+            let playerGuess = prompt('Guess the YouTuber:').toLowerCase();
+            let targetYoutuber = youtuberNames[currentLevel];
+
+            if (playerGuess === targetYoutuber) {
+                alert('Congratulations! You guessed it right.');
+                currentLevel++;
+
+                if (currentLevel < youtuberNames.length) {
+                    alert('Next Level!');
+                    playAudio();
+                } else {
+                    alert('You completed all levels!');
+                    pauseAudio();
+                }
+            } else {
+                alert(`Oops! You guessed ${playerGuess}. Try again!`);
+            }
+        }
+    </script>
+</body>
+</html>
