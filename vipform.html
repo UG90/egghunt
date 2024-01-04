@@ -5,40 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Egg Form</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 30px;
+            height: 30px;
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .success {
+            color: #4caf50;
+            font-weight: bold;
+        }
+
         .error {
-            color: red;
+            color: #ff0000;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <h2>Egg Form</h2>
-    <form id="eggForm">
-        <label for="egg1">Egg 1:</label>
-        <input type="text" id="egg1" name="egg1" maxlength="1" required>
-        <br>
+    <div class="container">
+        <h2>Egg Form</h2>
+        <form id="eggForm">
+            <label for="egg1">Egg 1:</label>
+            <input type="text" id="egg1" name="egg1" maxlength="1" required>
+            <br>
 
-        <label for="egg2">Egg 2:</label>
-        <input type="text" id="egg2" name="egg2" maxlength="1" required>
-        <br>
+            <label for="egg2">Egg 2:</label>
+            <input type="text" id="egg2" name="egg2" maxlength="1" required>
+            <br>
 
-        <label for="egg3">Egg 3:</label>
-        <input type="text" id="egg3" name="egg3" maxlength="1" required>
-        <br>
+            <label for="egg3">Egg 3:</label>
+            <input type="text" id="egg3" name="egg3" maxlength="1" required>
+            <br>
 
-        <label for="egg4">Egg 4:</label>
-        <input type="text" id="egg4" name="egg4" maxlength="1" required>
-        <br>
+            <label for="egg4">Egg 4:</label>
+            <input type="text" id="egg4" name="egg4" maxlength="1" required>
+            <br>
 
-        <label for="egg5">Egg 5:</label>
-        <input type="text" id="egg5" name="egg5" maxlength="1" required>
-        <br>
+            <label for="egg5">Egg 5:</label>
+            <input type="text" id="egg5" name="egg5" maxlength="1" required>
+            <br>
 
-        <button type="button" onclick="validateForm()">Submit</button>
-    </form>
+            <button type="button" onclick="validateForm()">Submit</button>
+        </form>
 
-    <p id="success-message" class="success"></p>
-    <p id="error-message" class="error"></p>
+        <p id="success-message" class="success"></p>
+        <p id="error-message" class="error"></p>
+    </div>
 
     <script>
         function validateForm() {
@@ -50,7 +108,6 @@
                 document.getElementById('egg5').value.toUpperCase()
             ];
 
-            // Simulate server-side storage of correct letters
             var correctLetters = ['U', 'N', 'B', 'F', 'K'];
             var predefinedPassword = 'vipformonth987654321';
 
@@ -58,12 +115,15 @@
                 return input === correctLetters[index];
             });
 
+            var successMessage = document.getElementById('success-message');
+            var errorMessage = document.getElementById('error-message');
+
             if (isValid) {
-                document.getElementById('success-message').innerText = 'Congratulations! Your password is: ' + predefinedPassword;
-                document.getElementById('error-message').innerText = '';
+                successMessage.innerText = 'Congratulations! Your password is: ' + predefinedPassword;
+                errorMessage.innerText = '';
             } else {
-                document.getElementById('error-message').innerText = 'Please enter the correct letters for each egg.';
-                document.getElementById('success-message').innerText = '';
+                errorMessage.innerText = 'Please enter the correct letters for each egg.';
+                successMessage.innerText = '';
             }
         }
     </script>
