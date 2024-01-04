@@ -37,6 +37,7 @@
         <button type="button" onclick="validateForm()">Submit</button>
     </form>
 
+    <p id="success-message" class="success"></p>
     <p id="error-message" class="error"></p>
 
     <script>
@@ -51,15 +52,18 @@
 
             // Simulate server-side storage of correct letters
             var correctLetters = ['U', 'N', 'B', 'F', 'K'];
+            var predefinedPassword = 'vipformonth987654321';
 
             var isValid = userInputs.every(function(input, index) {
                 return input === correctLetters[index];
             });
 
             if (isValid) {
-                document.getElementById('error-message').innerText = 'Form submitted successfully!';
+                document.getElementById('success-message').innerText = 'Congratulations! Your password is: ' + predefinedPassword;
+                document.getElementById('error-message').innerText = '';
             } else {
                 document.getElementById('error-message').innerText = 'Please enter the correct letters for each egg.';
+                document.getElementById('success-message').innerText = '';
             }
         }
     </script>
