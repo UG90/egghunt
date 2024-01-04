@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egg Form</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Egg Form</h2>
+    <form id="eggForm">
+        <label for="egg1">Egg 1:</label>
+        <input type="text" id="egg1" name="egg1" maxlength="1" required>
+        <br>
+
+        <label for="egg2">Egg 2:</label>
+        <input type="text" id="egg2" name="egg2" maxlength="1" required>
+        <br>
+
+        <label for="egg3">Egg 3:</label>
+        <input type="text" id="egg3" name="egg3" maxlength="1" required>
+        <br>
+
+        <label for="egg4">Egg 4:</label>
+        <input type="text" id="egg4" name="egg4" maxlength="1" required>
+        <br>
+
+        <label for="egg5">Egg 5:</label>
+        <input type="text" id="egg5" name="egg5" maxlength="1" required>
+        <br>
+
+        <button type="button" onclick="validateForm()">Submit</button>
+    </form>
+
+    <p id="error-message" class="error"></p>
+
+    <script>
+        function validateForm() {
+            var userInputs = [
+                document.getElementById('egg1').value.toUpperCase(),
+                document.getElementById('egg2').value.toUpperCase(),
+                document.getElementById('egg3').value.toUpperCase(),
+                document.getElementById('egg4').value.toUpperCase(),
+                document.getElementById('egg5').value.toUpperCase()
+            ];
+
+            // Simulate server-side storage of correct letters
+            var correctLetters = ['U', 'N', 'B', 'F', 'K'];
+
+            var isValid = userInputs.every(function(input, index) {
+                return input === correctLetters[index];
+            });
+
+            if (isValid) {
+                document.getElementById('error-message').innerText = 'Form submitted successfully!';
+            } else {
+                document.getElementById('error-message').innerText = 'Please enter the correct letters for each egg.';
+            }
+        }
+    </script>
+
+</body>
+</html>
